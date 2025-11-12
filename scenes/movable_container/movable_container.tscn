@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://tkba8wjqptbl"]
+
+[ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="1_y4qwb"]
+[ext_resource type="PackedScene" uid="uid://33nuh616c0bw" path="res://scenes/CouponContainer/coupon_container.tscn" id="2_ho7mw"]
+[ext_resource type="Script" uid="uid://cw8t33xo0nlky" path="res://scenes/movable_container/movable_container.gd" id="2_iwgwk"]
+[ext_resource type="Shader" uid="uid://d3vnya00oix66" path="res://assets/shader/Faux 3D Perspective.gdshader" id="3_7hvwm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyp12"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+shadow_size = 32
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qx5pb"]
+shader = ExtResource("3_7hvwm")
+shader_parameter/cull_backface = true
+shader_parameter/use_front = true
+shader_parameter/fov = 90.0
+shader_parameter/rot_y_deg = 0.0
+shader_parameter/rot_x_deg = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ivshn"]
+viewport_path = NodePath("SubViewport")
+
+[node name="MovableContainer" type="PanelContainer"]
+offset_right = 512.0
+offset_bottom = 512.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_kyp12")
+script = ExtResource("2_iwgwk")
+title = "优惠券"
+packed_scene = ExtResource("2_ho7mw")
+
+[node name="Display" type="TextureRect" parent="."]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_qx5pb")
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_ivshn")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Container" type="FoldableContainer" parent="SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 69.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_y4qwb")
+theme_override_font_sizes/font_size = 36
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

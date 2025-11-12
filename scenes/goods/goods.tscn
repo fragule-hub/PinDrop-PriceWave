@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://2mwcjsl4f10w"]
+
+[ext_resource type="Texture2D" uid="uid://bg5stg81mbpxh" path="res://assets/goods/日用百货/睡袋.png" id="1_su2ch"]
+[ext_resource type="Script" uid="uid://una6vqgebbf2" path="res://scenes/goods/goods.gd" id="1_y640w"]
+[ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="2_31s04"]
+[ext_resource type="Resource" uid="uid://d085e81wdi0ia" path="res://data/goods_stats/烤全鸡.tres" id="2_kyy70"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31s04"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(1, 1, 0.9411765, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Goods" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 512.0
+script = ExtResource("1_y640w")
+goods_stat = ExtResource("2_kyy70")
+
+[node name="Container" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Container"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_su2ch")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 0.84313726, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.8039216, 0.02745098, 0.11764706, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("2_31s04")
+theme_override_font_sizes/font_size = 64
+text = "睡袋"
+
+[node name="LabelContainer" type="PanelContainer" parent="."]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 256.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_31s04")
+
+[node name="Description" type="RichTextLabel" parent="LabelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.9607843, 0.9607843, 0.8627451, 1)
+theme_override_colors/font_shadow_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_constants/shadow_outline_size = 1
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("2_31s04")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "天上天下，为我独尊。"
+
+[node name="HoverTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_exited" from="LabelContainer" to="." method="_on_label_container_mouse_exited"]
+[connection signal="timeout" from="HoverTimer" to="." method="_on_hover_timer_timeout"]

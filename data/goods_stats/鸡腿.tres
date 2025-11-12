@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GoodsStat" load_steps=3 format=3 uid="uid://n63wn0pe06mi"]
+
+[ext_resource type="Texture2D" uid="uid://btgglhk466xme" path="res://assets/goods/食品/鸡腿.png" id="1_6chej"]
+[ext_resource type="Script" uid="uid://dmgtfc813oke7" path="res://data/goods_stats/goods_stat.gd" id="2_1wx5j"]
+
+[resource]
+script = ExtResource("2_1wx5j")
+price = 10.0
+special_price = 9.0
+icon = ExtResource("1_6chej")
+name = "鸡腿"
+description = "一只诱人的鸡腿，作为食品，能补充0.5饱腹度。"
+value = 0.5

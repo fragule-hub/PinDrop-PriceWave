@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0ixknc74p8k0"]
+
+[ext_resource type="Texture2D" uid="uid://ctm01njdpqtao" path="res://assets/laptop/资源 1@4x.png" id="1_nc30m"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nc30m"]
+viewport_path = NodePath("SubViewport")
+
+[node name="GameMaster" type="Node2D"]
+
+[node name="Laptop" type="TextureRect" parent="."]
+offset_left = -215.0
+offset_top = -4.0
+offset_right = 2132.0
+offset_bottom = 1132.0
+texture = ExtResource("1_nc30m")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="GameVisuals" type="TextureRect" parent="."]
+offset_left = 55.0
+offset_top = 72.0
+offset_right = 1860.0
+offset_bottom = 1022.0
+texture = SubResource("ViewportTexture_nc30m")
+
+[node name="SubViewport" type="SubViewport" parent="."]

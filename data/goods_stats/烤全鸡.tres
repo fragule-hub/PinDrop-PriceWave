@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GoodsStat" load_steps=3 format=3 uid="uid://d085e81wdi0ia"]
+
+[ext_resource type="Texture2D" uid="uid://i84ffejvmoxd" path="res://assets/goods/食品/烤全鸡.png" id="1_qmr70"]
+[ext_resource type="Script" uid="uid://dmgtfc813oke7" path="res://data/goods_stats/goods_stat.gd" id="2_fvu3t"]
+
+[resource]
+script = ExtResource("2_fvu3t")
+price = 20.0
+special_price = 18.0
+level = 2
+icon = ExtResource("1_qmr70")
+name = "烤全鸡"
+description = "一只诱人的烤全鸡，作为食品，能补充1.0饱腹度。"
+value = 1.0

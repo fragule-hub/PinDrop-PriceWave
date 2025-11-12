@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GoodsStat" load_steps=3 format=3 uid="uid://37o5g81q7sgg"]
+
+[ext_resource type="Texture2D" uid="uid://b11fo3opa1y42" path="res://assets/goods/食品/汉堡.png" id="1_xpieq"]
+[ext_resource type="Script" uid="uid://dmgtfc813oke7" path="res://data/goods_stats/goods_stat.gd" id="2_kxkhe"]
+
+[resource]
+script = ExtResource("2_kxkhe")
+price = 10.0
+special_price = 9.0
+icon = ExtResource("1_xpieq")
+name = "汉堡"
+description = "作为食品，能补充0.5饱腹度。"
+value = 0.5

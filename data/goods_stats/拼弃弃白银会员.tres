@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GoodsStat" load_steps=3 format=3 uid="uid://d2nmibqv4f4mt"]
+
+[ext_resource type="Texture2D" uid="uid://b176lumq6ijyq" path="res://assets/goods/奢侈品/VIP.png" id="1_uwar2"]
+[ext_resource type="Script" uid="uid://dmgtfc813oke7" path="res://data/goods_stats/goods_stat.gd" id="2_14c4u"]
+
+[resource]
+script = ExtResource("2_14c4u")
+goods_type = 4
+price = 50.0
+special_price = 40.0
+icon = ExtResource("1_uwar2")
+name = "拼弃弃白银会员"
+description = "获取更多便利"

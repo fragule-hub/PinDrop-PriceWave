@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GoodsStat" load_steps=3 format=3 uid="uid://d4cotbui0ke50"]
+
+[ext_resource type="Texture2D" uid="uid://bfjb6egy61vs1" path="res://assets/goods/食品/炸鸡块薯条.png" id="1_6df6m"]
+[ext_resource type="Script" uid="uid://dmgtfc813oke7" path="res://data/goods_stats/goods_stat.gd" id="2_y1s46"]
+
+[resource]
+script = ExtResource("2_y1s46")
+price = 20.0
+special_price = 18.0
+level = 2
+icon = ExtResource("1_6df6m")
+name = "炸鸡块薯条"
+description = "作为食品，能补充1.0饱腹度。"
+value = 1.0

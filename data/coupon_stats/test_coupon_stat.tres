@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="CouponStat" load_steps=7 format=3 uid="uid://ob1bxmxju23j"]
+
+[ext_resource type="Script" uid="uid://538dti2umdos" path="res://data/coupon_stats/condition/coupon_condition.gd" id="1_h2wox"]
+[ext_resource type="Script" uid="uid://da725it4007hb" path="res://data/coupon_stats/effect/coupon_effect.gd" id="2_h0l7s"]
+[ext_resource type="Script" uid="uid://l1md6y3k4pho" path="res://data/coupon_stats/coupon_stat.gd" id="2_h2wox"]
+
+[sub_resource type="Resource" id="Resource_h0l7s"]
+script = ExtResource("1_h2wox")
+condition_type = 1
+value = 10.0
+metadata/_custom_type_script = "uid://538dti2umdos"
+
+[sub_resource type="Resource" id="Resource_meuso"]
+script = ExtResource("1_h2wox")
+condition_type = 2
+metadata/_custom_type_script = "uid://538dti2umdos"
+
+[sub_resource type="Resource" id="Resource_kr83q"]
+script = ExtResource("2_h0l7s")
+effect_type = 1
+value = 0.7
+metadata/_custom_type_script = "uid://da725it4007hb"
+
+[resource]
+script = ExtResource("2_h2wox")
+conditions = Array[ExtResource("1_h2wox")]([SubResource("Resource_h0l7s"), SubResource("Resource_meuso")])
+effect = SubResource("Resource_kr83q")
+metadata/_custom_type_script = "uid://l1md6y3k4pho"

@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4vufjkerd7re"]
+
+[ext_resource type="Shader" uid="uid://d3vnya00oix66" path="res://assets/shader/Faux 3D Perspective.gdshader" id="1_8upj6"]
+[ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="1_cbola"]
+[ext_resource type="Script" uid="uid://cgtkavuchd5cy" path="res://scenes/movable_button/movable_button.gd" id="1_uhgh5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8upj6"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+shadow_size = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uhgh5"]
+shader = ExtResource("1_8upj6")
+shader_parameter/cull_backface = true
+shader_parameter/use_front = true
+shader_parameter/fov = 90.0
+shader_parameter/rot_y_deg = 0.0
+shader_parameter/rot_x_deg = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cbola"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbola"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 0.9411765, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.43529412, 0.38039216, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="MovableButton" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1664.0
+offset_bottom = -952.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "天上天下，\\n唯我独尊"
+script = ExtResource("1_uhgh5")
+
+[node name="Shadow" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8upj6")
+
+[node name="Display" type="TextureRect" parent="Shadow"]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_uhgh5")
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_cbola")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(256, 128)
+
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport"]
+unique_name_in_owner = true
+offset_right = 256.0
+offset_bottom = 128.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cbola")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport/PanelContainer"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 0.9411765, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("1_cbola")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[rainbow]按钮[/rainbow]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

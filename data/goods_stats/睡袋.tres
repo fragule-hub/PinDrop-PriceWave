@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GoodsStat" load_steps=3 format=3 uid="uid://bwuqf587bncy3"]
+
+[ext_resource type="Texture2D" uid="uid://bg5stg81mbpxh" path="res://assets/goods/日用百货/睡袋.png" id="1_yrnmp"]
+[ext_resource type="Script" uid="uid://dmgtfc813oke7" path="res://data/goods_stats/goods_stat.gd" id="2_fcy6g"]
+
+[resource]
+script = ExtResource("2_fcy6g")
+goods_type = 1
+price = 50.0
+special_price = 40.0
+level = 0
+icon = ExtResource("1_yrnmp")
+name = "睡袋"
+description = "让你免受夜晚的寒冷。"

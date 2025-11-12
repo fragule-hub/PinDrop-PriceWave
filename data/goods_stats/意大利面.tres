@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GoodsStat" load_steps=3 format=3 uid="uid://cdixg1rq0nvhv"]
+
+[ext_resource type="Texture2D" uid="uid://b3j4aan3ldur0" path="res://assets/goods/食品/意大利面.png" id="1_4m8x7"]
+[ext_resource type="Script" uid="uid://dmgtfc813oke7" path="res://data/goods_stats/goods_stat.gd" id="2_mahjv"]
+
+[resource]
+script = ExtResource("2_mahjv")
+price = 10.0
+special_price = 9.0
+icon = ExtResource("1_4m8x7")
+name = "意大利面"
+description = "作为食品，能补充0.5饱腹度。"
+value = 0.5
