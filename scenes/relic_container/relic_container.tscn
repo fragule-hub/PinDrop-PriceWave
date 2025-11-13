@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cso6ivxu74wdk"]
+
+[ext_resource type="Script" uid="uid://cnpd1prmg7gx1" path="res://scenes/relic_container/relic_container.gd" id="1_os63i"]
+[ext_resource type="Script" uid="uid://bejpyx5unvotf" path="res://scripts/relic_spawner.gd" id="2_jyrlt"]
+
+[node name="RelicContainer" type="GridContainer"]
+custom_minimum_size = Vector2(524, 260)
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 8
+script = ExtResource("1_os63i")
+
+[node name="RelicSpawner" type="Node" parent="."]
+script = ExtResource("2_jyrlt")
+metadata/_custom_type_script = "uid://bejpyx5unvotf"

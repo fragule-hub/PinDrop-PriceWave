@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RelicStat" load_steps=3 format=3 uid="uid://bah57rirlcf6d"]
+
+[ext_resource type="Script" uid="uid://d8ew8u8gl1wd" path="res://data/relic_stats/relic_stat.gd" id="1_2t25w"]
+[ext_resource type="Texture2D" uid="uid://qlfavlxw440j" path="res://assets/icon/3.png" id="1_6tfnu"]
+
+[resource]
+script = ExtResource("1_2t25w")
+icon = ExtResource("1_6tfnu")
+name = "条件漏洞"
+rarity = 2
+description = "你的所有优惠券被视为无门槛券。"
+metadata/_custom_type_script = "uid://d8ew8u8gl1wd"

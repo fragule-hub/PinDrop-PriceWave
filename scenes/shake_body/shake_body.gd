@@ -3,6 +3,12 @@ class_name ShakeBody
 
 # 视觉节点
 @onready var _visual: PanelContainer = $PanelContainer
+@onready var icon: TextureRect = $PanelContainer/Icon
+@onready var label: Label = $PanelContainer/Label
+
+@export var goods_stat: GoodsStat : set = _set_goods_stat, get = _get_goods_stat
+
+var _goods_stat: GoodsStat
 
 # --- 物理参数 ---
 # 二阶弹簧-阻尼模型
@@ -33,14 +39,26 @@ var _initial_position: Vector2
 var _initial_scale: Vector2
 
 
+func _set_goods_stat(new_goods_stat: GoodsStat) -> void:
+	_goods_stat = new_goods_stat
+	_update_visuals()
+
+func _get_goods_stat() -> GoodsStat:
+	return _goods_stat
+
+func _update_visuals() -> void:
+	if _goods_stat != null:
+		if is_instance_valid(icon):
+			icon.texture = _goods_stat.icon
+		if is_instance_valid(label):
+			label.text = _goods_stat.name
+
 func _ready() -> void:
 	_initial_position = position
 	_initial_scale = _visual.scale
-	# 将视觉节点的旋转轴心设置到其中心
 	_visual.pivot_offset = _visual.size * 0.5
-	# 初始时禁用物理处理，以节省性能
 	set_physics_process(false)
-
+	_update_visuals()
 
 func _physics_process(delta: float) -> void:
 	# 如果角速度和角度都非常小，则停止动画

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bldcq4l34pagh"]
+[gd_scene load_steps=7 format=3 uid="uid://bldcq4l34pagh"]
 
 [ext_resource type="Script" uid="uid://xrjxr7xt6h46" path="res://scenes/shake_body/shake_body.gd" id="1_5e8ay"]
 [ext_resource type="Texture2D" uid="uid://b3j4aan3ldur0" path="res://assets/goods/食品/意大利面.png" id="1_ke0at"]
+[ext_resource type="Resource" uid="uid://37o5g81q7sgg" path="res://data/goods_stats/汉堡.tres" id="2_tdtdu"]
 [ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="3_th1m3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5e8ay"]
@@ -27,6 +28,7 @@ corner_detail = 5
 [node name="ShakeBody" type="AnimatableBody2D"]
 input_pickable = true
 script = ExtResource("1_5e8ay")
+goods_stat = ExtResource("2_tdtdu")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5e8ay")
@@ -60,5 +62,7 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_fonts/font = ExtResource("3_th1m3")
 theme_override_font_sizes/font_size = 64
 text = "这是名称"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

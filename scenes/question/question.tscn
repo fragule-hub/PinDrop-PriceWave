@@ -1,0 +1,91 @@
+[gd_scene load_steps=6 format=3 uid="uid://cx2lmoxmk0etj"]
+
+[ext_resource type="Script" uid="uid://dkqfkqwiuj3b6" path="res://scenes/question/question.gd" id="1_33idg"]
+[ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="1_jrjjw"]
+[ext_resource type="Resource" uid="uid://cd3t1cuubp5wc" path="res://data/question_stats/test_question.tres" id="2_jj0mw"]
+[ext_resource type="PackedScene" uid="uid://c4vufjkerd7re" path="res://scenes/movable_button/movable_button.tscn" id="2_v7jrx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7jrx"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.9607843, 0.9607843, 0.8627451, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.8784314, 0.7490196, 0.72156864, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Question" type="Node2D"]
+script = ExtResource("1_33idg")
+question_stat = ExtResource("2_jj0mw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 1895.0
+offset_bottom = 1055.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 650.0
+offset_bottom = 980.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v7jrx")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/PanelContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 0.9411765, 1)
+theme_override_colors/font_shadow_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_jrjjw")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "	无家可归、无处可住，你只能指望靠工作换取食物和容身之所。你还年轻——虽然也只是相对而言——好在经验多少能弥补体力上的不足。
+	可就算你把报酬压得再低，也始终无人愿意接纳你。毕竟，谁又会愿意雇用一个带着人生“污点”的人？被“拼弃弃”辞退的经历，就像一道无法摆脱的阴影，笼罩着你的全部过去。
+	然而，终究还是有人向你敞开了门——那是“拼弃弃”旗下的一家外卖公司。它来者不拒，无论什么人都照单全收。但相应的，工资也低得可怜，甚至根本称不上是工资——只能拿到一些几乎毫无价值的优惠券。
+	不过，此时此刻，这些“报酬”却依然必要。至少，它们能让你暂时活下去。"
+
+[node name="MovableButton" parent="Panel" instance=ExtResource("2_v7jrx")]
+layout_mode = 1
+offset_left = 1150.0
+offset_top = 175.0
+offset_right = -464.0
+offset_bottom = -727.0
+button_size = Vector2(512, 128)
+
+[node name="MovableButton2" parent="Panel" instance=ExtResource("2_v7jrx")]
+layout_mode = 1
+offset_left = 1150.0
+offset_top = 425.0
+offset_right = -464.0
+offset_bottom = -477.0
+button_size = Vector2(512, 128)
+
+[node name="MovableButton3" parent="Panel" instance=ExtResource("2_v7jrx")]
+layout_mode = 1
+offset_left = 1150.0
+offset_top = 675.0
+offset_right = -464.0
+offset_bottom = -227.0
+button_size = Vector2(512, 128)

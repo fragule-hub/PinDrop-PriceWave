@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicStat" load_steps=3 format=3 uid="uid://b622r1ukdfg61"]
+
+[ext_resource type="Texture2D" uid="uid://cumxejjmnc08a" path="res://assets/icon/65.png" id="1_1e8jh"]
+[ext_resource type="Script" uid="uid://d8ew8u8gl1wd" path="res://data/relic_stats/relic_stat.gd" id="1_os0m6"]
+
+[resource]
+script = ExtResource("1_os0m6")
+icon = ExtResource("1_1e8jh")
+name = "回收故障"
+rarity = 1
+description = "在购物结束时，从你本次消耗的优惠券中随机保留 1 张。"
+parameter1 = 1.0
+metadata/_custom_type_script = "uid://d8ew8u8gl1wd"

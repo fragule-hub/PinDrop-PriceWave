@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dis2w6snqg1qr"]
+
+[ext_resource type="Script" uid="uid://c1ou5t1pf2crq" path="res://scenes/goods_container/goods_container.gd" id="1_p4ma5"]
+[ext_resource type="Script" uid="uid://ds5dfoumlyy2v" path="res://scripts/goods_spawner.gd" id="3_n4ead"]
+
+[node name="GoodsContainer" type="GridContainer"]
+custom_minimum_size = Vector2(536, 536)
+offset_right = 536.0
+offset_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 4
+script = ExtResource("1_p4ma5")
+is_check_backpack = true
+
+[node name="GoodsSpawner" type="Node" parent="." node_paths=PackedStringArray("container")]
+script = ExtResource("3_n4ead")
+container = NodePath("..")
+metadata/_custom_type_script = "uid://ds5dfoumlyy2v"

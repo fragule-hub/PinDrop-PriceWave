@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="QuestionStat" load_steps=7 format=3 uid="uid://cd3t1cuubp5wc"]
+
+[ext_resource type="Script" uid="uid://p8bx5so6fegq" path="res://data/question_stats/question_stat.gd" id="1_01d3l"]
+[ext_resource type="Script" uid="uid://l1md6y3k4pho" path="res://data/coupon_stats/coupon_stat.gd" id="1_i0emr"]
+[ext_resource type="Script" uid="uid://dmgtfc813oke7" path="res://data/goods_stats/goods_stat.gd" id="2_kklvw"]
+[ext_resource type="Script" uid="uid://d8ew8u8gl1wd" path="res://data/relic_stats/relic_stat.gd" id="3_064ns"]
+[ext_resource type="Script" uid="uid://bdn7mlvjg0a7h" path="res://data/question_stats/question_option.gd" id="4_xqd4f"]
+
+[sub_resource type="Resource" id="Resource_g1luj"]
+script = ExtResource("4_xqd4f")
+enabled = true
+text = "给我也整俩呗。"
+is_coupon = 1
+metadata/_custom_type_script = "uid://bdn7mlvjg0a7h"
+
+[resource]
+script = ExtResource("1_01d3l")
+info_text = "这是一个测试用的事件。"
+option_1 = SubResource("Resource_g1luj")
+metadata/_custom_type_script = "uid://p8bx5so6fegq"

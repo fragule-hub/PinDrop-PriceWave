@@ -15,9 +15,10 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
-shadow_size = 16
+shadow_size = 20
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uhgh5"]
+resource_local_to_scene = true
 shader = ExtResource("1_8upj6")
 shader_parameter/cull_backface = true
 shader_parameter/use_front = true
@@ -47,6 +48,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="MovableButton" type="Button"]
+custom_minimum_size = Vector2(256, 128)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -60,8 +62,8 @@ script = ExtResource("1_uhgh5")
 [node name="Shadow" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 256.0
+offset_bottom = 128.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8upj6")
 

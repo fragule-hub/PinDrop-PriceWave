@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 
 GlobalSignal="*res://autoload/global_signal.gd"
 GlobalPlayer="*res://autoload/global_player.gd"
+GlobalGoods="*res://autoload/global_goods.gd"
+GlobalRelic="*res://autoload/global_relic.gd"
 
 [display]
 

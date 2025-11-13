@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://tkba8wjqptbl"]
 
 [ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="1_y4qwb"]
-[ext_resource type="PackedScene" uid="uid://33nuh616c0bw" path="res://scenes/CouponContainer/coupon_container.tscn" id="2_ho7mw"]
+[ext_resource type="PackedScene" uid="uid://dis2w6snqg1qr" path="res://scenes/goods_container/goods_container.tscn" id="2_7hvwm"]
 [ext_resource type="Script" uid="uid://cw8t33xo0nlky" path="res://scenes/movable_container/movable_container.gd" id="2_iwgwk"]
 [ext_resource type="Shader" uid="uid://d3vnya00oix66" path="res://assets/shader/Faux 3D Perspective.gdshader" id="3_7hvwm"]
 
@@ -18,7 +18,8 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 shadow_size = 32
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qx5pb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7hvwm"]
+resource_local_to_scene = true
 shader = ExtResource("3_7hvwm")
 shader_parameter/cull_backface = true
 shader_parameter/use_front = true
@@ -36,13 +37,13 @@ offset_bottom = 512.0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_kyp12")
 script = ExtResource("2_iwgwk")
-title = "优惠券"
-packed_scene = ExtResource("2_ho7mw")
+title = "谷子"
+packed_scene = ExtResource("2_7hvwm")
 
 [node name="Display" type="TextureRect" parent="."]
 unique_name_in_owner = true
 z_index = 1
-material = SubResource("ShaderMaterial_qx5pb")
+material = SubResource("ShaderMaterial_7hvwm")
 layout_mode = 2
 mouse_filter = 2
 texture = SubResource("ViewportTexture_ivshn")

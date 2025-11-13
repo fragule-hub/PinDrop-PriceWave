@@ -7,6 +7,7 @@ signal button_is_clicked(button: Button)
 @onready var display: TextureRect = %Display
 @onready var panel: PanelContainer = %PanelContainer
 @onready var rich_text: RichTextLabel = %RichTextLabel
+@onready var sub_viewport: SubViewport = $SubViewport
 
 @onready var shader_material: ShaderMaterial = display.material as ShaderMaterial
 
@@ -30,8 +31,8 @@ var _press_pos: Vector2 = Vector2.ZERO
 var _drag_offset: Vector2 = Vector2.ZERO
 
 # 阴影样式（复制以避免共享资源被改动）
-const SHADOW_NORMAL_SIZE: int = 16
-const SHADOW_PICKUP_SIZE: int = 24
+const SHADOW_NORMAL_SIZE: int = 20
+const SHADOW_PICKUP_SIZE: int = 32
 var _shadow_style: StyleBoxFlat
 
 # 字体大小动态调整
@@ -39,10 +40,26 @@ const MAX_TEXT_LENGTH_FOR_NORMAL_FONT: int = 5
 const NORMAL_FONT_SIZE: int = 48  # 默认字体大小
 const SMALL_FONT_SIZE: int = 36    # 长文本的字体大小
 
+@export var button_size: Vector2 = Vector2(256, 128): 
+	set(value):
+		button_size = value
+		if is_node_ready():
+			_update_size()
+
 func _ready() -> void:
+	_update_size()
 	_init_shadow_style()
 	_init_text()
 	pivot_offset = size / 2.0
+
+func _update_size() -> void:
+	custom_minimum_size = button_size
+	if shadow:
+		shadow.custom_minimum_size = button_size
+	if sub_viewport:
+		sub_viewport.size = button_size
+	if panel:
+		panel.custom_minimum_size = button_size
 
 func _init_shadow_style() -> void:
 	if shadow:
