@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dp7vo1g8f8x3s"]
+[gd_scene load_steps=12 format=3 uid="uid://dp7vo1g8f8x3s"]
 
 [ext_resource type="Script" uid="uid://cex10ffcmgd0a" path="res://scenes/main/main.gd" id="1_hujxm"]
 [ext_resource type="PackedScene" uid="uid://tkba8wjqptbl" path="res://scenes/movable_container/movable_container.tscn" id="1_k2fmo"]
@@ -9,9 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://in7jqdn8jhwk" path="res://scenes/coupon_pop_window/coupon_pop_window.tscn" id="7_yyfjg"]
 [ext_resource type="StyleBox" uid="uid://1tdd80b5hdo5" path="res://assets/theme/question_description.tres" id="8_b1x3f"]
 [ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="8_yyfjg"]
+[ext_resource type="Script" uid="uid://ds5dfoumlyy2v" path="res://scripts/goods_spawner.gd" id="11_blune"]
+[ext_resource type="Script" uid="uid://fecymh1hylrg" path="res://scripts/goods_label_maker.gd" id="11_ouso4"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hujxm")
+max_select_count = 1
 
 [node name="Player" type="Node" parent="."]
 
@@ -42,6 +45,8 @@ packed_scene = ExtResource("3_6q06x")
 custom_minimum_size = Vector2(1920, 1080)
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ClockPointer" parent="." instance=ExtResource("4_l3cfh")]
 position = Vector2(960, 0)
@@ -87,6 +92,22 @@ theme_override_font_sizes/font_size = 48
 text = "限时特惠"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="交易" type="Button" parent="限时特惠/VBoxContainer"]
+custom_minimum_size = Vector2(175, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 38
+text = "交易"
+
+[node name="GoodsLabelMaker" type="Node" parent="." node_paths=PackedStringArray("container")]
+script = ExtResource("11_ouso4")
+container = NodePath("../限时特惠/VBoxContainer")
+metadata/_custom_type_script = "uid://fecymh1hylrg"
+
+[node name="GoodsSpawner" type="Node" parent="."]
+script = ExtResource("11_blune")
+metadata/_custom_type_script = "uid://ds5dfoumlyy2v"
 
 [connection signal="button_is_clicked" from="每日签到" to="." method="_on_movable_button_button_is_clicked"]
 [connection signal="confirmed" from="每日签到/CouponPopWindow" to="." method="_on_coupon_pop_window_confirmed"]

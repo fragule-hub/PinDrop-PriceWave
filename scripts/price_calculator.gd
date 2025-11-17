@@ -5,6 +5,11 @@ signal price_change(index, price)
 signal price_labels_rebuild(from_index: int, new_steps: Array)
 signal price_step_added(index: int, text: String, price: float)
 
+# 价格计算器
+# - build_price_dict: 统计原价/特价，初始化当前价与基础标签数量
+# - _on_coupon_is_clicked: 判定并应用优惠，发出文本步骤信号
+# - _on_coupon_is_cancelled: 回退并重算后续步骤，必要时批量失败
+
 var goods_stats: Array[GoodsStat]
 var goods_types: Array[GoodsStat.GoodsType] = []
 

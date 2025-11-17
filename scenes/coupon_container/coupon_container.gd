@@ -1,5 +1,7 @@
 # coupon_container.gd
 # 优惠券容器，负责管理和显示优惠券
+# - 战斗模式下监听通过、取消、失败与重算失败信号
+# - 管理选中序列与数字图标，驱动券节点的位移动画与状态切换
 extends ScrollContainer
 class_name CouponContainer
 

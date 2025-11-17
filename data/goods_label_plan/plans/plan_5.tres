@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="GoodsLabelPlan" load_steps=7 format=3 uid="uid://i3ir2kfn3phg"]
+
+[ext_resource type="Script" uid="uid://5ik5jplv3ajx" path="res://data/goods_label_plan/goods_random_plan.gd" id="1_smn5p"]
+[ext_resource type="Script" uid="uid://dd1hgekjyd2d5" path="res://data/goods_label_plan/goods_label_plan.gd" id="2_2e82p"]
+[ext_resource type="Script" uid="uid://cfjuro8cj8y6d" path="res://data/goods_label_plan/goods_specific_item.gd" id="3_ol2b1"]
+[ext_resource type="Resource" uid="uid://bwuqf587bncy3" path="res://data/goods_stats/睡袋.tres" id="4_p2sl4"]
+
+[sub_resource type="Resource" id="Resource_8m2fe"]
+script = ExtResource("1_smn5p")
+count = 2
+metadata/_custom_type_script = "uid://5ik5jplv3ajx"
+
+[sub_resource type="Resource" id="Resource_kn6vj"]
+script = ExtResource("3_ol2b1")
+goods_stat = ExtResource("4_p2sl4")
+time_limit = 24
+metadata/_custom_type_script = "uid://cfjuro8cj8y6d"
+
+[resource]
+script = ExtResource("2_2e82p")
+random_entries = Array[ExtResource("1_smn5p")]([SubResource("Resource_8m2fe")])
+specific_entries = Array[ExtResource("3_ol2b1")]([SubResource("Resource_kn6vj")])
+metadata/_custom_type_script = "uid://dd1hgekjyd2d5"

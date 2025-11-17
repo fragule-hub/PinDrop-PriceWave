@@ -4,17 +4,19 @@ signal day_advanced(new_day: int)
 signal time_advanced(new_time: ClockPointer.TimeSegment)  # 修复拼写错误
 signal time_changed(old_time: ClockPointer.TimeSegment, new_time: ClockPointer.TimeSegment)  # 时间变化信号
 signal backpack_updated(new_coupons: Array[CouponStat])  # 背包优惠券更新信号
+signal daily_reward_changed(available: bool)  # 每日签到可领取状态变更
 
 var backpack_coupons: Array[CouponStat] # 背包中的优惠券
 var used_coupons: Array[CouponStat] # 已使用过的优惠券（墓地）
 
 # 世界
 var days: int = 1
-var times: ClockPointer.TimeSegment = ClockPointer.TimeSegment.上午
+var times: ClockPointer.TimeSegment = ClockPointer.TimeSegment.夜晚
 # 属性
 var satiety: float = 2.0 # 饱腹度，每天结束时扣除1点
 var mood: float = 2.0 # 情绪值，每天结束时扣除1点
 var health: float = 2.0 # 健康值，正常不会衰减
+var daily_reward_available: bool = true # 每日签到奖励是否可领取
 
 # 时间推移功能
 func advance_time():
@@ -37,6 +39,8 @@ func advance_time():
 	time_advanced.emit(times)
 	
 	if new_day_advanced:
+		daily_reward_available = true
+		daily_reward_changed.emit(daily_reward_available)
 		day_advanced.emit(days)
 		print("新的一天开始了！第", days, "天")
 	
@@ -108,3 +112,8 @@ func clear_backpack():
 	backpack_coupons.clear()
 	backpack_updated.emit([])
 	print("背包已清空")
+
+func claim_daily_reward() -> void:
+	"""领取每日签到奖励并更新状态"""
+	daily_reward_available = false
+	daily_reward_changed.emit(daily_reward_available)

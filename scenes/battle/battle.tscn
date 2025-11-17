@@ -118,4 +118,7 @@ metadata/_custom_type_script = "uid://csytj7jfa4g3u"
 script = ExtResource("11_fisqk")
 metadata/_custom_type_script = "uid://datc0ilheqamp"
 
+[connection signal="button_is_clicked" from="Button/成交" to="." method="_on_成交_button_is_clicked"]
+[connection signal="button_is_clicked" from="Button/返回" to="." method="_on_返回_button_is_clicked"]
+
 [editable path="Button/返回"]

@@ -1,0 +1,205 @@
+[gd_scene load_steps=11 format=3 uid="uid://brnk077bhlsgd"]
+
+[ext_resource type="Texture2D" uid="uid://btgglhk466xme" path="res://assets/goods/食品/鸡腿.png" id="1_1q5qi"]
+[ext_resource type="Script" uid="uid://8cxqpyufd87r" path="res://scenes/goods_label/goods_label.gd" id="1_71frf"]
+[ext_resource type="Resource" uid="uid://d2nmibqv4f4mt" path="res://data/goods_stats/拼弃弃白银会员.tres" id="2_asu5v"]
+[ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="4_s4kgp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ild76"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4kgp"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdmqt"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1q5qi"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.84313726, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71frf"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.84313726, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_asu5v"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 0.9411765, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.43529412, 0.38039216, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="GoodsLabel" type="Button"]
+custom_minimum_size = Vector2(0, 100)
+offset_right = 618.0
+offset_bottom = 100.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ild76")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_s4kgp")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qdmqt")
+toggle_mode = true
+script = ExtResource("1_71frf")
+goods_stat = ExtResource("2_asu5v")
+
+[node name="容器" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -307.0
+offset_top = -48.0
+offset_right = 307.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="图标容器" type="PanelContainer" parent="容器"]
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1q5qi")
+
+[node name="图标" type="TextureRect" parent="容器/图标容器"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_1q5qi")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="简介" type="PanelContainer" parent="容器"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.5
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_71frf")
+
+[node name="描述" type="RichTextLabel" parent="容器/简介"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_s4kgp")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "汉堡：原价20，[pulse freq=1.0 color=red ease=-1.0]特价18[/pulse]
+简介：汉堡，我们只做好汉堡，好汉堡，补充0.5饱腹度。"
+
+[node name="时间容器" type="PanelContainer" parent="容器"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_asu5v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="容器/时间容器"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="容器/时间容器/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84313726, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.8, 0.46666667, 0.13333334, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 26
+text = "- 限时 -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="时间" type="RichTextLabel" parent="容器/时间容器/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.95686275, 0, 0.03529412, 1)
+theme_override_colors/font_shadow_color = Color(0.83137256, 0.6862745, 0.21568628, 1)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("4_s4kgp")
+theme_override_font_sizes/normal_font_size = 26
+text = "8:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

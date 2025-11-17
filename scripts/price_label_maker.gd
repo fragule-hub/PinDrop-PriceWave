@@ -2,8 +2,10 @@ extends Node
 class_name PriceLabelMaker
 
 # 价格标签生成器
-# - create_price_label: 生成单个 PriceLabel 并播放坠落动画
+# - create_price_label: 生成单个 PriceLabel 并播放坠落动画；可选择立即禁用上一标签
 # - create_price_labels_sequential: 批量顺序生成，以上一个标签坠落动画的“中点”信号推进
+# - remove_labels_from_index: 按序号释放后续标签
+# - enable_last_label/disable_last_label: 控制当前保留的最后一个标签的启用/禁用动画
 
 @export var price_label_scene: PackedScene = preload("uid://cuynesxxsyf7q")
 
