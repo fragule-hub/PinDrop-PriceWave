@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkkh3f7rigoi7"]
+
+[ext_resource type="Script" uid="uid://bbtm40v6cqoip" path="res://scenes/goods_pop_window/goods_pop_window.gd" id="1_goods_pop"]
+[ext_resource type="PackedScene" uid="uid://dis2w6snqg1qr" path="res://scenes/goods_container/goods_container.tscn" id="2_goods_container"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_goods_pop"]
+bg_color = Color(0.2, 0.2, 0.2, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="GoodsPopWindow" type="PanelContainer"]
+z_index = 1
+offset_right = 600.0
+offset_bottom = 400.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_goods_pop")
+script = ExtResource("1_goods_pop")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "获得商品"
+horizontal_alignment = 1
+
+[node name="GoodsContainer" parent="VBoxContainer" instance=ExtResource("2_goods_container")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ConfirmButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "确认"
+
+[connection signal="pressed" from="VBoxContainer/ConfirmButton" to="." method="_on_确认_pressed"]

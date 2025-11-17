@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="QuestionStat" load_steps=7 format=3 uid="uid://cd3t1cuubp5wc"]
+[gd_resource type="Resource" script_class="QuestionStat" load_steps=9 format=3 uid="uid://begadyv4efrck"]
 
 [ext_resource type="Script" uid="uid://p8bx5so6fegq" path="res://data/question_stats/question_stat.gd" id="1_01d3l"]
 [ext_resource type="Script" uid="uid://l1md6y3k4pho" path="res://data/coupon_stats/coupon_stat.gd" id="1_i0emr"]
@@ -9,11 +9,26 @@
 [sub_resource type="Resource" id="Resource_g1luj"]
 script = ExtResource("4_xqd4f")
 enabled = true
-text = "给我也整俩呗。"
+text = "获取随机优惠券(稀有度+1)"
 is_coupon = 1
+metadata/_custom_type_script = "uid://bdn7mlvjg0a7h"
+
+[sub_resource type="Resource" id="Resource_2h8k9"]
+script = ExtResource("4_xqd4f")
+enabled = true
+text = "获取指定商品"
+is_goods = 1
+
+[sub_resource type="Resource" id="Resource_3j7m8"]
+script = ExtResource("4_xqd4f")
+enabled = true
+text = "获取随机遗物(稀有度1,数量1)"
+is_relics = 1
 
 [resource]
 script = ExtResource("1_01d3l")
-info_text = "这是一个测试用的事件。"
+info_text = "这是一个完整测试用的事件，包含随机优惠券(稀有度+1)、指定商品、随机遗物(稀有度1,数量1)。"
 option_1 = SubResource("Resource_g1luj")
+option_2 = SubResource("Resource_2h8k9")
+option_3 = SubResource("Resource_3j7m8")
 metadata/_custom_type_script = "uid://p8bx5so6fegq"

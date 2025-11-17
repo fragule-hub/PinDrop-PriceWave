@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dp7vo1g8f8x3s"]
+[gd_scene load_steps=8 format=3 uid="uid://dp7vo1g8f8x3s"]
 
 [ext_resource type="Script" uid="uid://cex10ffcmgd0a" path="res://scenes/main/main.gd" id="1_hujxm"]
 [ext_resource type="PackedScene" uid="uid://tkba8wjqptbl" path="res://scenes/movable_container/movable_container.tscn" id="1_k2fmo"]
@@ -7,15 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://doej6kv3gclqi" path="res://scenes/clock_pointer/clock_pointer.tscn" id="4_l3cfh"]
 [ext_resource type="PackedScene" uid="uid://c4vufjkerd7re" path="res://scenes/movable_button/movable_button.tscn" id="5_6q06x"]
 [ext_resource type="PackedScene" uid="uid://in7jqdn8jhwk" path="res://scenes/coupon_pop_window/coupon_pop_window.tscn" id="7_yyfjg"]
-[ext_resource type="StyleBox" uid="uid://1tdd80b5hdo5" path="res://assets/theme/question_description.tres" id="8_b1x3f"]
-[ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="8_yyfjg"]
 
 [node name="Main" type="Node2D"]
+visible = false
 script = ExtResource("1_hujxm")
 
-[node name="Player" type="Node" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="遗物" parent="Player" instance=ExtResource("1_k2fmo")]
+[node name="遗物" parent="." instance=ExtResource("1_k2fmo")]
 offset_left = 1350.0
 offset_top = 50.0
 offset_right = 1862.0
@@ -23,25 +25,20 @@ offset_bottom = 562.0
 title = "遗物列表"
 packed_scene = ExtResource("2_l3cfh")
 
-[node name="物品" parent="Player" instance=ExtResource("1_k2fmo")]
+[node name="物品" parent="." instance=ExtResource("1_k2fmo")]
 offset_left = 1350.0
 offset_top = 200.0
 offset_right = 1862.0
 offset_bottom = 712.0
 title = "物品背包"
 
-[node name="优惠券" parent="Player" instance=ExtResource("1_k2fmo")]
+[node name="优惠券" parent="." instance=ExtResource("1_k2fmo")]
 offset_left = 1350.0
 offset_top = 350.0
 offset_right = 1862.0
 offset_bottom = 862.0
 title = "优惠券列表"
 packed_scene = ExtResource("3_6q06x")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(1920, 1080)
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="ClockPointer" parent="." instance=ExtResource("4_l3cfh")]
 position = Vector2(960, 0)
@@ -61,32 +58,6 @@ offset_left = -200.0
 offset_top = -50.0
 offset_right = 389.0
 offset_bottom = 794.0
-
-[node name="限时特惠" type="PanelContainer" parent="."]
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 700.0
-offset_bottom = 1030.0
-theme_override_styles/panel = ExtResource("8_b1x3f")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="限时特惠"]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="标题" type="Label" parent="限时特惠/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.95686275, 0, 0.03529412, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.5058824, 0.84705883, 0.8156863, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 2
-theme_override_constants/shadow_outline_size = 4
-theme_override_fonts/font = ExtResource("8_yyfjg")
-theme_override_font_sizes/font_size = 48
-text = "限时特惠"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="button_is_clicked" from="每日签到" to="." method="_on_movable_button_button_is_clicked"]
 [connection signal="confirmed" from="每日签到/CouponPopWindow" to="." method="_on_coupon_pop_window_confirmed"]

@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqtyklaigvd8n"]
+
+[ext_resource type="Script" uid="uid://cvggcqfjpcvmq" path="res://scenes/relic_pop_window/relic_pop_window.gd" id="1_relic_pop"]
+[ext_resource type="PackedScene" uid="uid://cso6ivxu74wdk" path="res://scenes/relic_container/relic_container.tscn" id="2_relic_container"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_relic_pop"]
+bg_color = Color(0.15, 0.1, 0.2, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.7, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="RelicPopWindow" type="PanelContainer"]
+z_index = 1
+offset_right = 600.0
+offset_bottom = 400.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_relic_pop")
+script = ExtResource("1_relic_pop")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "获得遗物"
+horizontal_alignment = 1
+
+[node name="RelicContainer" parent="VBoxContainer" instance=ExtResource("2_relic_container")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ConfirmButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "确认"
+
+[connection signal="pressed" from="VBoxContainer/ConfirmButton" to="." method="_on_确认_pressed"]

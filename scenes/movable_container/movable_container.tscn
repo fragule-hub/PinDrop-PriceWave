@@ -16,7 +16,7 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
-shadow_size = 32
+shadow_size = 24
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7hvwm"]
 resource_local_to_scene = true
@@ -60,6 +60,7 @@ size_flags_horizontal = 3
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("1_y4qwb")
 theme_override_font_sizes/font_size = 36
+folded = true
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

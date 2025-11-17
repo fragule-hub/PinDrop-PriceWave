@@ -16,6 +16,8 @@ grow_vertical = 2
 texture = ExtResource("1_yinv3")
 script = ExtResource("2_eutj7")
 coupon_stat = ExtResource("3_flnwd")
+move_shift = null
+max_shift = null
 
 [node name="LabelBox" type="HBoxContainer" parent="."]
 layout_mode = 1

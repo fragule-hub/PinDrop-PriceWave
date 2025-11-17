@@ -1,0 +1,117 @@
+[gd_scene load_steps=8 format=3 uid="uid://cuynesxxsyf7q"]
+
+[ext_resource type="Shader" uid="uid://d3vnya00oix66" path="res://assets/shader/Faux 3D Perspective.gdshader" id="1_16cal"]
+[ext_resource type="Script" uid="uid://c8opciimhuv48" path="res://scenes/price_label/price_label.gd" id="1_i20rx"]
+[ext_resource type="StyleBox" uid="uid://by0w1jaf65ilx" path="res://assets/theme/movable_button.tres" id="3_7sth5"]
+[ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="4_rm701"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i20rx"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+shadow_size = 20
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lghxe"]
+resource_local_to_scene = true
+shader = ExtResource("1_16cal")
+shader_parameter/cull_backface = true
+shader_parameter/use_front = true
+shader_parameter/fov = 90.0
+shader_parameter/rot_y_deg = 0.0
+shader_parameter/rot_x_deg = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ay4dv"]
+viewport_path = NodePath("SubViewport")
+
+[node name="PriceLabel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1408.0
+offset_bottom = -952.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i20rx")
+
+[node name="Shadow" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(256, 64)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_i20rx")
+
+[node name="Display" type="TextureRect" parent="."]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_lghxe")
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 128.0
+mouse_filter = 2
+texture = SubResource("ViewportTexture_ay4dv")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(512, 128)
+
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport"]
+unique_name_in_owner = true
+offset_right = 512.0
+offset_bottom = 128.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_7sth5")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport/PanelContainer"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.49803922, 0.3137255, 1)
+theme_override_colors/font_outline_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_shadow_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("4_rm701")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "价值几何"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="SubViewport/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.05882353, 0.29803923, 0.5058824, 1)
+theme_override_colors/font_shadow_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 42
+text = " ①"
+
+[node name="Line1" type="Line2D" parent="SubViewport/PanelContainer"]
+unique_name_in_owner = true
+visible = false
+points = PackedVector2Array(508, 4, 4, 124)
+default_color = Color(0.95686275, 0, 0.03529412, 1)
+
+[node name="Line2" type="Line2D" parent="SubViewport/PanelContainer"]
+unique_name_in_owner = true
+visible = false
+points = PackedVector2Array(4, 4, 508, 124)
+default_color = Color(0.95686275, 0, 0.03529412, 1)

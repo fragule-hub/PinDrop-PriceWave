@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://d3vnya00oix66" path="res://assets/shader/Faux 3D Perspective.gdshader" id="1_8upj6"]
 [ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="1_cbola"]
 [ext_resource type="Script" uid="uid://cgtkavuchd5cy" path="res://scenes/movable_button/movable_button.gd" id="1_uhgh5"]
+[ext_resource type="StyleBox" uid="uid://by0w1jaf65ilx" path="res://assets/theme/movable_button.tres" id="3_f06iq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8upj6"]
 content_margin_left = 0.0
@@ -30,25 +31,8 @@ shader_parameter/inset = 0.0
 [sub_resource type="ViewportTexture" id="ViewportTexture_cbola"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbola"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(1, 1, 0.9411765, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(1, 0.43529412, 0.38039216, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
 [node name="MovableButton" type="Button"]
-custom_minimum_size = Vector2(256, 128)
+custom_minimum_size = Vector2(200, 100)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -61,9 +45,12 @@ script = ExtResource("1_uhgh5")
 
 [node name="Shadow" type="PanelContainer" parent="."]
 unique_name_in_owner = true
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 128.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8upj6")
 
@@ -83,7 +70,7 @@ unique_name_in_owner = true
 offset_right = 256.0
 offset_bottom = 128.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_cbola")
+theme_override_styles/panel = ExtResource("3_f06iq")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SubViewport/PanelContainer"]
 unique_name_in_owner = true

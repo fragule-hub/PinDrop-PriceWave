@@ -1,30 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cx2lmoxmk0etj"]
+[gd_scene load_steps=9 format=3 uid="uid://cx2lmoxmk0etj"]
 
 [ext_resource type="Script" uid="uid://dkqfkqwiuj3b6" path="res://scenes/question/question.gd" id="1_33idg"]
 [ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="1_jrjjw"]
-[ext_resource type="Resource" uid="uid://cd3t1cuubp5wc" path="res://data/question_stats/test_question.tres" id="2_jj0mw"]
+[ext_resource type="Resource" uid="uid://begadyv4efrck" path="res://data/question_stats/test_question_full.tres" id="2_un4lh"]
 [ext_resource type="PackedScene" uid="uid://c4vufjkerd7re" path="res://scenes/movable_button/movable_button.tscn" id="2_v7jrx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7jrx"]
-content_margin_left = 16.0
-content_margin_top = 16.0
-content_margin_right = 16.0
-content_margin_bottom = 6.0
-bg_color = Color(0.9607843, 0.9607843, 0.8627451, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.8784314, 0.7490196, 0.72156864, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[ext_resource type="StyleBox" uid="uid://1tdd80b5hdo5" path="res://assets/theme/question_description.tres" id="3_61a41"]
+[ext_resource type="PackedScene" uid="uid://in7jqdn8jhwk" path="res://scenes/coupon_pop_window/coupon_pop_window.tscn" id="6_un4lh"]
+[ext_resource type="PackedScene" uid="uid://bkkh3f7rigoi7" path="res://scenes/goods_pop_window/goods_pop_window.tscn" id="7_goods_pop"]
+[ext_resource type="PackedScene" uid="uid://dqtyklaigvd8n" path="res://scenes/relic_pop_window/relic_pop_window.tscn" id="8_relic_pop"]
 
 [node name="Question" type="Node2D"]
 script = ExtResource("1_33idg")
-question_stat = ExtResource("2_jj0mw")
+question_stat = ExtResource("2_un4lh")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -41,15 +28,16 @@ offset_top = 25.0
 offset_right = 1895.0
 offset_bottom = 1055.0
 
-[node name="PanelContainer" type="PanelContainer" parent="Panel"]
+[node name="Description" type="PanelContainer" parent="Panel"]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 50.0
 offset_right = 650.0
 offset_bottom = 980.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_v7jrx")
+theme_override_styles/panel = ExtResource("3_61a41")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/PanelContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Description"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 0.9411765, 1)
@@ -66,7 +54,7 @@ text = "	无家可归、无处可住，你只能指望靠工作换取食物和�
 	然而，终究还是有人向你敞开了门——那是“拼弃弃”旗下的一家外卖公司。它来者不拒，无论什么人都照单全收。但相应的，工资也低得可怜，甚至根本称不上是工资——只能拿到一些几乎毫无价值的优惠券。
 	不过，此时此刻，这些“报酬”却依然必要。至少，它们能让你暂时活下去。"
 
-[node name="MovableButton" parent="Panel" instance=ExtResource("2_v7jrx")]
+[node name="MovableButton1" parent="Panel" instance=ExtResource("2_v7jrx")]
 layout_mode = 1
 offset_left = 1150.0
 offset_top = 175.0
@@ -89,3 +77,28 @@ offset_top = 675.0
 offset_right = -464.0
 offset_bottom = -227.0
 button_size = Vector2(512, 128)
+
+[node name="CouponPopWindow" parent="." instance=ExtResource("6_un4lh")]
+visible = false
+offset_left = 1009.0
+offset_top = 125.0
+offset_right = 1598.0
+offset_bottom = 969.0
+
+[node name="GoodsPopWindow" parent="." instance=ExtResource("7_goods_pop")]
+visible = false
+offset_left = 800.0
+offset_top = 200.0
+offset_right = 1400.0
+offset_bottom = 600.0
+
+[node name="RelicPopWindow" parent="." instance=ExtResource("8_relic_pop")]
+visible = false
+offset_left = 800.0
+offset_top = 200.0
+offset_right = 1400.0
+offset_bottom = 600.0
+
+[connection signal="button_is_clicked" from="Panel/MovableButton1" to="." method="_on_movable_button_1_button_is_clicked"]
+[connection signal="button_is_clicked" from="Panel/MovableButton2" to="." method="_on_movable_button_2_button_is_clicked"]
+[connection signal="button_is_clicked" from="Panel/MovableButton3" to="." method="_on_movable_button_3_button_is_clicked"]

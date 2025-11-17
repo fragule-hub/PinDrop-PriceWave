@@ -1,0 +1,121 @@
+[gd_scene load_steps=15 format=3 uid="uid://cwb05d8e5q3kh"]
+
+[ext_resource type="Script" uid="uid://7nydh4lxh3o0" path="res://scenes/battle/battle.gd" id="1_pll4o"]
+[ext_resource type="PackedScene" uid="uid://tkba8wjqptbl" path="res://scenes/movable_container/movable_container.tscn" id="1_xd4uy"]
+[ext_resource type="PackedScene" uid="uid://cso6ivxu74wdk" path="res://scenes/relic_container/relic_container.tscn" id="2_0yh6x"]
+[ext_resource type="Script" uid="uid://dmgtfc813oke7" path="res://data/goods_stats/goods_stat.gd" id="2_agsc7"]
+[ext_resource type="PackedScene" uid="uid://33nuh616c0bw" path="res://scenes/coupon_container/coupon_container.tscn" id="3_h0kxc"]
+[ext_resource type="Resource" uid="uid://37o5g81q7sgg" path="res://data/goods_stats/汉堡.tres" id="3_oiw7q"]
+[ext_resource type="PackedScene" uid="uid://c4vufjkerd7re" path="res://scenes/movable_button/movable_button.tscn" id="4_0yh6x"]
+[ext_resource type="Shader" uid="uid://d3vnya00oix66" path="res://assets/shader/Faux 3D Perspective.gdshader" id="5_h0kxc"]
+[ext_resource type="Script" uid="uid://ck0mnnmfogrxt" path="res://scripts/shake_body_maker.gd" id="7_py4tk"]
+[ext_resource type="Script" uid="uid://csytj7jfa4g3u" path="res://scripts/price_calculator.gd" id="10_oiw7q"]
+[ext_resource type="Script" uid="uid://datc0ilheqamp" path="res://scripts/price_label_maker.gd" id="11_fisqk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fh7rg"]
+resource_local_to_scene = true
+shader = ExtResource("5_h0kxc")
+shader_parameter/cull_backface = true
+shader_parameter/use_front = true
+shader_parameter/fov = 90.0
+shader_parameter/rot_y_deg = 0.0
+shader_parameter/rot_x_deg = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h0kxc"]
+viewport_path = NodePath("Button/返回/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0kxc"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_pll4o")
+goods_array = Array[ExtResource("2_agsc7")]([ExtResource("3_oiw7q")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Player" type="Node" parent="."]
+
+[node name="遗物" parent="Player" instance=ExtResource("1_xd4uy")]
+offset_left = 1350.0
+offset_top = 50.0
+offset_right = 1862.0
+offset_bottom = 562.0
+title = "遗物列表"
+packed_scene = ExtResource("2_0yh6x")
+
+[node name="物品" parent="Player" instance=ExtResource("1_xd4uy")]
+offset_left = 1350.0
+offset_top = 200.0
+offset_right = 1862.0
+offset_bottom = 712.0
+title = "物品背包"
+
+[node name="优惠券" parent="Player" instance=ExtResource("1_xd4uy")]
+offset_left = 1350.0
+offset_top = 350.0
+offset_right = 1862.0
+offset_bottom = 862.0
+title = "优惠券列表"
+packed_scene = ExtResource("3_h0kxc")
+
+[node name="Button" type="Node" parent="."]
+
+[node name="成交" parent="Button" instance=ExtResource("4_0yh6x")]
+offset_left = 550.0
+offset_top = 900.0
+offset_right = -1114.0
+offset_bottom = -52.0
+text = "成交"
+button_size = Vector2(512, 128)
+
+[node name="返回" parent="Button" instance=ExtResource("4_0yh6x")]
+offset_left = 980.0
+offset_top = 915.0
+offset_right = -684.0
+offset_bottom = -37.0
+theme_override_font_sizes/font_size = 8
+text = "[font_size=36]不想要了[/font_size]"
+
+[node name="Display" parent="Button/返回/Shadow" index="0"]
+material = SubResource("ShaderMaterial_fh7rg")
+texture = SubResource("ViewportTexture_h0kxc")
+
+[node name="PanelContainer" parent="Button/返回/SubViewport" index="0"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_h0kxc")
+
+[node name="RichTextLabel" parent="Button/返回/SubViewport/PanelContainer" index="0"]
+theme_override_colors/default_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+theme_override_colors/font_shadow_color = Color(0.9607843, 0.9607843, 0.8627451, 1)
+
+[node name="ShakeBodyMaker" type="Node" parent="."]
+script = ExtResource("7_py4tk")
+metadata/_custom_type_script = "uid://ck0mnnmfogrxt"
+
+[node name="PriceCalculator" type="Node" parent="."]
+script = ExtResource("10_oiw7q")
+metadata/_custom_type_script = "uid://csytj7jfa4g3u"
+
+[node name="PriceLabelMaker" type="Node" parent="."]
+script = ExtResource("11_fisqk")
+metadata/_custom_type_script = "uid://datc0ilheqamp"
+
+[editable path="Button/返回"]

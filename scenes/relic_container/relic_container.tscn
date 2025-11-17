@@ -10,6 +10,7 @@ offset_bottom = 40.0
 columns = 8
 script = ExtResource("1_os63i")
 
-[node name="RelicSpawner" type="Node" parent="."]
+[node name="RelicSpawner" type="Node" parent="." node_paths=PackedStringArray("container")]
 script = ExtResource("2_jyrlt")
+container = NodePath("..")
 metadata/_custom_type_script = "uid://bejpyx5unvotf"

@@ -1,6 +1,7 @@
 extends Node
 
 signal relic_ownership_changed
+signal relic_triggered(stat: RelicStat)
 
 const RELIC_STATS_PATH = "res://data/relic_stats"
 
@@ -49,3 +50,14 @@ func remove_relic(stat: RelicStat) -> void:
 	if relic_ownership.has(stat):
 		relic_ownership[stat] = false
 		relic_ownership_changed.emit()
+
+func trigger_relic(stat: RelicStat) -> void:
+	if has_relic(stat):
+		relic_triggered.emit(stat)
+
+func trigger_relic_by_name(relic_name: String) -> void:
+	for s in all_relic_stats:
+		if s != null and s.name == relic_name:
+			if has_relic(s):
+				relic_triggered.emit(s)
+			return

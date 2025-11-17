@@ -25,14 +25,16 @@ var _selected_coupons: Array[Coupon] = []
 func _ready() -> void:
 	# 连接全局信号
 	if is_battle:
-		GlobalSignal.coupon_passed.connect(_on_coupon_passed)
+		GlobalSignal.coupon_is_passed.connect(_on_coupon_passed)
 	else:
 		GlobalSignal.coupon_is_clicked.connect(_on_coupon_clicked)
 	GlobalSignal.coupon_is_cancelled.connect(_on_coupon_cancelled)
 	GlobalSignal.coupon_is_failed.connect(_on_coupon_failed)
 	GlobalSignal.coupons_recalc_failed.connect(_on_coupons_recalc_failed)
-	# 如果配置为检查背包，则生成优惠券
+	
+	# 如果配置为检查背包，则连接背包更新信号并初始化
 	if is_check_backpack:
+		GlobalPlayer.backpack_updated.connect(_on_backpack_updated)
 		spawn_backpack_coupons()
 
 func _input(event: InputEvent) -> void:
@@ -46,14 +48,20 @@ func _input(event: InputEvent) -> void:
 
 # 更新优惠券容器
 func update_coupons() -> void:
-	# 清空所有图标和选择
-	number_icon_factory.clear_icons()
+	# 清空所有图标和选择 - 使用正确的清除方法
+	_clear_all_icons()
 	_selected_coupons.clear()
 	
 	# 释放所有现有的优惠券子节点
 	for n in get_children():
 		if n is Coupon:
 			n.queue_free()
+
+# 清除所有数字图标
+func _clear_all_icons() -> void:
+	# 从最大序号开始删除，避免索引问题
+	for i in range(_selected_coupons.size(), 0, -1):
+		number_icon_factory.remove_number_icon(i)
 
 # 获取当前所有选中的优惠券节点
 func get_selected_coupons() -> Array[Coupon]:
@@ -68,10 +76,26 @@ func get_selected_coupon_stats() -> Array[CouponStat]:
 
 # 生成并添加初始的背包优惠券
 func spawn_backpack_coupons() -> void:
-	# 使用 CouponSpawner 生成优惠券统计信息
-	var coupon_stats = coupon_spawner.generate_coupon_stats(10, CouponCondition.ConditionType.无门槛)
-	# 根据统计信息生成实际的优惠券节点
-	coupon_spawner.spawn_coupons(coupon_stats)
+	## 从GlobalPlayer获取背包中的优惠券信息
+	#var backpack_coupons = GlobalPlayer.get_backpack_coupons()
+	#
+	#if backpack_coupons.size() > 0:
+		## 根据背包中的优惠券统计信息生成实际的优惠券节点
+		#coupon_spawner.spawn_coupons(backpack_coupons)
+	coupon_spawner.spawn_coupons(coupon_spawner.generate_coupon_stats(4,CouponCondition.ConditionType.无门槛))
+	coupon_spawner.spawn_coupons(coupon_spawner.generate_coupon_stats(4,CouponCondition.ConditionType.满减))
+	coupon_spawner.spawn_coupons(coupon_spawner.generate_coupon_stats(4,CouponCondition.ConditionType.专用, GoodsStat.GoodsType.食品))
+
+# 处理背包更新信号
+func _on_backpack_updated(new_coupons: Array[CouponStat]) -> void:
+	print("收到背包更新信号，优惠券数量: ", new_coupons.size())
+	
+	# 清空当前显示
+	update_coupons()
+	
+	# 如果背包中有优惠券，重新生成显示
+	if new_coupons.size() > 0:
+		coupon_spawner.spawn_coupons(new_coupons)
 
 
 # 处理优惠券计算通过的信号
@@ -123,11 +147,27 @@ func _on_coupon_cancelled(coupon: Coupon) -> void:
 
 # 处理优惠券失败的信号
 func _on_coupon_failed(_coupon: Coupon) -> void:
-	pass
+	if is_instance_valid(_coupon):
+		_coupon.play_fail_bump()
 
 # 处理所有优惠券重新计算失败的信号
-func _on_coupons_recalc_failed() -> void:
-	pass
+func _on_coupons_recalc_failed(coupons: Array) -> void:
+	if coupons.is_empty():
+		return
+	var first_fail: Coupon = coupons[0]
+	var start_idx := _selected_coupons.find(first_fail)
+	if start_idx == -1:
+		return
+	for i in range(start_idx, _selected_coupons.size()):
+		var c: Coupon = _selected_coupons[i]
+		number_icon_factory.remove_number_icon(i + 1)
+		c.move_back()
+		c.switch_to_base()
+	while _selected_coupons.size() > start_idx:
+		_selected_coupons.pop_back()
+	for i in range(_selected_coupons.size()):
+		var c: Coupon = _selected_coupons[i]
+		number_icon_factory.create_number_icon(i + 1, Vector2(250, 0), c)
 
 # --- 私有辅助方法 ---
 

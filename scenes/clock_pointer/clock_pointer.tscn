@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://doej6kv3gclqi"]
+
+[ext_resource type="Script" uid="uid://c4wtj4mjkangv" path="res://scenes/clock_pointer/clock_pointer.gd" id="1_a3j7r"]
+[ext_resource type="FontFile" uid="uid://eqksgfrkbeqx" path="res://assets/theme/SourceHanSerifCN-Bold.otf" id="2_x6x6g"]
+
+[node name="ClockPointer" type="Node2D"]
+script = ExtResource("1_a3j7r")
+
+[node name="BackgroundCircle" type="Polygon2D" parent="."]
+color = Color(0.9607843, 0.9607843, 0.8627451, 1)
+polygon = PackedVector2Array(150, 0, 145, 39, 130, 75, 106, 106, 75, 130, 39, 145, 0, 150, -39, 145, -75, 130, -106, 106, -130, 75, -145, 39, -150, 0, -145, -39, -130, -75, -106, -106, -75, -130, -39, -145, 0, -150, 39, -145, 75, -130, 106, -106, 130, -75, 145, -39)
+
+[node name="times" type="Node2D" parent="."]
+rotation = 2.3561945
+
+[node name="上午" type="Polygon2D" parent="times"]
+color = Color(1, 0.84313726, 0, 1)
+polygon = PackedVector2Array(0, 0, 0, -150, 75, -130, 130, -75, 150, 0)
+
+[node name="下午" type="Polygon2D" parent="times"]
+color = Color(1, 0.49803922, 0.3137255, 1)
+polygon = PackedVector2Array(0, 0, 150, 0, 130, 75, 75, 130, 0, 150)
+
+[node name="夜晚" type="Polygon2D" parent="times"]
+color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+polygon = PackedVector2Array(0, 0, 0, 150, -75, 130, -130, 75, -150, 0)
+
+[node name="Pointer" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, 100, -25, 175, 25, 175)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -5.0
+offset_right = 48.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.21176471, 0.27058825, 0.30980393, 1)
+theme_override_colors/font_shadow_color = Color(0.003921569, 0.4745098, 0.43529412, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("2_x6x6g")
+theme_override_font_sizes/font_size = 48
+text = "下午"

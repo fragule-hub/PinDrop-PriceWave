@@ -35,6 +35,7 @@ func _ready() -> void:
 	set_physics_process(false)
 	_update_self()
 	resized.connect(_update_font_size)
+	GlobalRelic.relic_triggered.connect(_on_relic_triggered)
 
 func _update_self() -> void:
 	if _relic_stat == null:
@@ -95,3 +96,21 @@ func _on_label_container_mouse_exited() -> void:
 	progress_bar.value = 0
 	label_container.visible = false
 	set_physics_process(false)
+
+func _on_relic_triggered(stat: RelicStat) -> void:
+	if _relic_stat == null:
+		return
+	if stat == _relic_stat:
+		_play_trigger_anim()
+
+func _play_trigger_anim() -> void:
+	var tw := create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(self, "scale", Vector2(1.15, 1.15), 0.18).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if icon != null:
+		tw.tween_property(icon, "modulate", Color(icon.modulate.r, icon.modulate.g, icon.modulate.b, 0.6), 0.18).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tw = create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(self, "scale", Vector2(1.0, 1.0), 0.18).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	if icon != null:
+		tw.tween_property(icon, "modulate", Color(icon.modulate.r, icon.modulate.g, icon.modulate.b, 1.0), 0.18).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
