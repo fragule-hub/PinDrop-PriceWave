@@ -91,3 +91,16 @@ func configure(stat: GoodsStat, limit: TimeLimit) -> void:
 	if _countdown_timer:
 		_countdown_timer.stop()
 		_countdown_timer.start()
+
+func set_remaining_time(hours: int, minutes: int) -> void:
+	_remaining_hours = max(hours, 0)
+	_remaining_minutes = clamp(minutes, 0, 59)
+	_refresh_time_label()
+	if _countdown_timer:
+		if _remaining_hours == 0 and _remaining_minutes == 0:
+			_countdown_timer.stop()
+		else:
+			_countdown_timer.start()
+
+func get_remaining_time() -> Dictionary:
+	return {"hours": _remaining_hours, "minutes": _remaining_minutes}

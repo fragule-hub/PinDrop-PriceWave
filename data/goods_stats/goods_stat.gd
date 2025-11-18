@@ -32,9 +32,13 @@ func goods_type_to_string() -> String:
 	return "_"
 
 func get_current_price() -> float:
+	if GlobalPlayer != null:
+		return price *  ( 2 ** (GlobalPlayer.days-1) )
 	return price
 
 func get_currnt_special_price() -> float:
+	if GlobalPlayer != null:
+		return special_price * ( 2 ** (GlobalPlayer.days-1) )
 	return special_price
 
 func get_bbcode_introduction() -> String:

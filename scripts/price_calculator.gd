@@ -45,12 +45,13 @@ func build_price_dict(stats: Array[GoodsStat]) -> Dictionary:
 	for s in goods_stats:
 		if s == null:
 			continue
-		original_price += s.price
-		if s.special_price != 0.0:
+		original_price += s.get_current_price()
+		var sp := s.get_currnt_special_price()
+		if sp != 0.0:
 			has_any_special = true
-			special_total += s.special_price
+			special_total += sp
 		else:
-			special_total += s.price
+			special_total += s.get_current_price()
 		if not goods_types.has(s.goods_type):
 			goods_types.append(s.goods_type)
 		_goods_type_set[s.goods_type] = true

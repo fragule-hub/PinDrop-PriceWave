@@ -10,6 +10,9 @@ var relic_ownership: Dictionary
 
 func _ready() -> void:
 	_load_all_relic_stats()
+	for rs in all_relic_stats:
+		if rs:
+			add_relic(rs)
 
 func _load_all_relic_stats() -> void:
 	var dir = DirAccess.open(RELIC_STATS_PATH)

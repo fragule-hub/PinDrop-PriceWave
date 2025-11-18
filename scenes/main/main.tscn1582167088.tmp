@@ -16,6 +16,7 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hujxm")
 goods_label_plan = ExtResource("2_blune")
+max_select_count = null
 selection_limit_mode = 1
 
 [node name="Player" type="Node" parent="."]

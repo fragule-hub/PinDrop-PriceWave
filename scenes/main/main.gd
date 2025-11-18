@@ -10,6 +10,7 @@ enum SelectionLimitMode { BLOCK, DROP_OLDEST }
 @export var max_select_count: int = 2
 @export var selection_limit_mode: SelectionLimitMode = SelectionLimitMode.BLOCK
 var _selected_labels: Array[GoodsLabel] = []
+var _current_labels: Array[GoodsLabel] = []
 
 @onready var _coupon_container_instance: CouponContainer = get_node_or_null("Player/优惠券/SubViewport/Container/CouponContainer") as CouponContainer
 @onready var spawner: GoodsSpawner = $GoodsSpawner
@@ -43,14 +44,25 @@ func _ready() -> void:
 		ClockPointer.TimeSegment.夜晚:
 			time_steps = 2
 
-
-
-	# 根据资源计划创建 GoodsLabel
+	# 根据资源计划或缓存创建 GoodsLabel
 	if goods_label_maker and goods_label_plan:
 		var spawner_node: GoodsSpawner = spawner
 		if spawner_node == null:
 			spawner_node = coupon_pop_window.get_node_or_null("VBoxContainer/GoodsContainer/GoodsSpawner") as GoodsSpawner
+		if GlobalPlayer.today_goods_labels_data.size() > 0:
+			for entry in GlobalPlayer.today_goods_labels_data:
+				var stat: GoodsStat = entry.get("goods_stat")
+				var hours: int = int(entry.get("hours", GoodsLabel.TimeLimit.HOURS_8))
+				var minutes: int = int(entry.get("minutes", 0))
+				if stat:
+					var label_c = goods_label_maker.spawn_one(stat, GoodsLabel.TimeLimit.HOURS_8)
+					if label_c:
+						label_c.set_remaining_time(hours, minutes)
+						label_c.toggled.connect(_on_goods_label_toggled.bind(label_c))
+						_current_labels.append(label_c)
+			return
 		# 随机项
+		var created_labels: Array[GoodsLabel] = []
 		if spawner_node and goods_label_plan.random_entries.size() > 0:
 			for rand in goods_label_plan.random_entries:
 				var stats: Array[GoodsStat] = spawner_node.select_goods_random(rand.rarity, rand.count, rand.type)
@@ -58,6 +70,7 @@ func _ready() -> void:
 					var label_r = goods_label_maker.spawn_one(s, rand.time_limit)
 					if label_r:
 						label_r.toggled.connect(_on_goods_label_toggled.bind(label_r))
+						created_labels.append(label_r)
 		# 指定项（根据时间段降低时长；低于8视为不存在）
 		if goods_label_plan.specific_entries.size() > 0:
 			for it in goods_label_plan.specific_entries:
@@ -67,6 +80,13 @@ func _ready() -> void:
 						var label_s = goods_label_maker.spawn_one(it.goods_stat, adjusted)
 						if label_s:
 							label_s.toggled.connect(_on_goods_label_toggled.bind(label_s))
+							created_labels.append(label_s)
+		_current_labels = created_labels.duplicate()
+		var today_data: Array = []
+		for label in created_labels:
+			var rt: Dictionary = label.get_remaining_time()
+			today_data.append({"goods_stat": label.goods_stat, "hours": int(rt.get("hours", 0)), "minutes": int(rt.get("minutes", 0))})
+		GlobalPlayer.today_goods_labels_data = today_data
 
 func _on_goods_label_toggled(toggled_on: bool, label: GoodsLabel) -> void:
 	if toggled_on:
@@ -106,3 +126,22 @@ func _adjust_time_limit(limit: int, steps: int) -> int:
 	if new_index >= seq.size():
 		return -1
 	return seq[new_index]
+
+
+func _on_交易_pressed() -> void:
+	var selected_stats: Array[GoodsStat] = []
+	for label in _selected_labels:
+		if label and label.goods_stat:
+			selected_stats.append(label.goods_stat)
+	if selected_stats.is_empty():
+		return
+
+	var today_data: Array = []
+	for label in _current_labels:
+		if label and label.goods_stat:
+			var rt: Dictionary = label.get_remaining_time()
+			today_data.append({"goods_stat": label.goods_stat, "hours": int(rt.get("hours", 0)), "minutes": int(rt.get("minutes", 0))})
+	GlobalPlayer.today_goods_labels_data = today_data
+
+	GlobalPlayer.next_trade_goods_stats = selected_stats
+	get_tree().change_scene_to_file("res://scenes/battle/battle.tscn")

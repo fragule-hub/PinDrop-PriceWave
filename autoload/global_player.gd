@@ -11,12 +11,31 @@ var used_coupons: Array[CouponStat] # 已使用过的优惠券（墓地）
 
 # 世界
 var days: int = 1
-var times: ClockPointer.TimeSegment = ClockPointer.TimeSegment.夜晚
+var times: ClockPointer.TimeSegment = ClockPointer.TimeSegment.上午
 # 属性
 var satiety: float = 2.0 # 饱腹度，每天结束时扣除1点
 var mood: float = 2.0 # 情绪值，每天结束时扣除1点
 var health: float = 2.0 # 健康值，正常不会衰减
 var daily_reward_available: bool = true # 每日签到奖励是否可领取
+
+# 下一次交易的待选商品（来自主场景限时特惠的已按下标签）
+var next_trade_goods_stats: Array[GoodsStat] = []
+
+# 当日展示的 GoodsLabel 数据缓存（用于返回主场景时复用）：
+# 每项为 { goods_stat: GoodsStat, hours: int, minutes: int }
+var today_goods_labels_data: Array = []
+
+func clear_today_goods_labels() -> void:
+	today_goods_labels_data.clear()
+
+# 问题失败次数
+var question_fail_count: int = 0
+
+func increase_question_fail_count() -> void:
+	question_fail_count += 1
+
+func reset_question_fail_count() -> void:
+	question_fail_count = 0
 
 # 时间推移功能
 func advance_time():
@@ -37,8 +56,10 @@ func advance_time():
 	# 发出信号
 	time_changed.emit(old_time, times)
 	time_advanced.emit(times)
+	today_goods_labels_data.clear()
 	
 	if new_day_advanced:
+		clear_today_goods_labels()
 		daily_reward_available = true
 		daily_reward_changed.emit(daily_reward_available)
 		day_advanced.emit(days)

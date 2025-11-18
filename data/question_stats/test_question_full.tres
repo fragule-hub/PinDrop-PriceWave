@@ -22,8 +22,9 @@ is_goods = 1
 [sub_resource type="Resource" id="Resource_3j7m8"]
 script = ExtResource("4_xqd4f")
 enabled = true
-text = "获取随机遗物(稀有度1,数量1)"
+text = "50%获取随机遗物(稀有度1,数量1)"
 is_relics = 1
+relic_success_rate_percent = 50
 
 [resource]
 script = ExtResource("1_01d3l")

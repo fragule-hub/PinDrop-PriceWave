@@ -117,11 +117,27 @@ func handle_option(option: QuestionOption) -> void:
 	
 	# 处理商品
 	if option.is_goods == QuestionOption.QuestionOptionEnum.随机:
+		var base_rate_g: int = int(option.goods_success_rate_percent)
+		var bonus_g: int = GlobalPlayer.question_fail_count * 10
+		var final_rate_g: int = clamp(base_rate_g + bonus_g, 0, 100)
+		var roll_g: int = randi() % 100
+		if roll_g >= final_rate_g:
+			GlobalPlayer.increase_question_fail_count()
+			return
+		GlobalPlayer.reset_question_fail_count()
 		# 使用商品弹窗的随机生成方法
 		goods_popup_window.toggle(true)
 		goods_popup_window.generate_goods_random(option.goods_rarity, option.goods_count, option.goods_type)
 		await goods_popup_window.confirmed
 	elif option.is_goods == QuestionOption.QuestionOptionEnum.指定:
+		var base_rate_gs: int = int(option.goods_success_rate_percent)
+		var bonus_gs: int = GlobalPlayer.question_fail_count * 10
+		var final_rate_gs: int = clamp(base_rate_gs + bonus_gs, 0, 100)
+		var roll_gs: int = randi() % 100
+		if roll_gs >= final_rate_gs:
+			GlobalPlayer.increase_question_fail_count()
+			return
+		GlobalPlayer.reset_question_fail_count()
 		# 生成指定的商品
 		if option.goods.size() > 0:
 			# 显示商品弹窗并生成指定商品
@@ -131,11 +147,27 @@ func handle_option(option: QuestionOption) -> void:
 	
 	# 处理遗物
 	if option.is_relics == QuestionOption.QuestionOptionEnum.随机:
+		var base_rate_r: int = int(option.relic_success_rate_percent)
+		var bonus_r: int = GlobalPlayer.question_fail_count * 10
+		var final_rate_r: int = clamp(base_rate_r + bonus_r, 0, 100)
+		var roll_r: int = randi() % 100
+		if roll_r >= final_rate_r:
+			GlobalPlayer.increase_question_fail_count()
+			return
+		GlobalPlayer.reset_question_fail_count()
 		# 使用遗物弹窗的随机生成方法
 		relic_popup_window.toggle(true)
 		relic_popup_window.generate_relics_random(option.relics_rarity, option.relics_count)
 		await relic_popup_window.confirmed
 	elif option.is_relics == QuestionOption.QuestionOptionEnum.指定:
+		var base_rate_rs: int = int(option.relic_success_rate_percent)
+		var bonus_rs: int = GlobalPlayer.question_fail_count * 10
+		var final_rate_rs: int = clamp(base_rate_rs + bonus_rs, 0, 100)
+		var roll_rs: int = randi() % 100
+		if roll_rs >= final_rate_rs:
+			GlobalPlayer.increase_question_fail_count()
+			return
+		GlobalPlayer.reset_question_fail_count()
 		# 生成指定的遗物
 		if option.relics.size() > 0:
 			# 显示遗物弹窗并生成指定遗物

@@ -15,6 +15,9 @@ func _ready() -> void:
 	_load_all_goods_stats()
 	add_requested.connect(_on_add_requested)
 	remove_requested.connect(_on_remove_requested)
+	for gs in all_goods_stats:
+		if gs and gs.goods_type == GoodsStat.GoodsType.食品:
+			add_requested.emit(gs, 1)
 
 func _load_all_goods_stats() -> void:
 	var dir = DirAccess.open(GOODS_STATS_PATH)

@@ -12,6 +12,9 @@ class_name Battle
 @onready var price_label_maker: PriceLabelMaker = $PriceLabelMaker
 
 func _ready() -> void:
+	if GlobalPlayer.next_trade_goods_stats.size() > 0:
+		goods_array = GlobalPlayer.next_trade_goods_stats
+		GlobalPlayer.next_trade_goods_stats = []
 	shake_body_maker.create_shake_body(goods_array, Vector2(680, 300))
 	var price_map := price_calculator.build_price_dict(goods_array)
 	var label_data_array: Array[Dictionary] = []
@@ -52,9 +55,12 @@ func _configure_coupon_container_for_battle() -> void:
 		cc.is_check_backpack = false
 
 func _on_成交_button_is_clicked(_btn: Button) -> void:
+	if price_calculator.get_current_price() != 0.0:
+		return
 	for gs in goods_array:
 		if gs:
 			GlobalGoods.add_requested.emit(gs, 1)
+	GlobalPlayer.advance_time()
 	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
 
 func _on_返回_button_is_clicked(_btn: Button) -> void:

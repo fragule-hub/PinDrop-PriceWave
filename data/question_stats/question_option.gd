@@ -21,9 +21,11 @@ enum QuestionOptionEnum { 否, 随机, 指定 }
 @export var goods_rarity: int = 1                     # 商品稀有度 (1-5)
 @export var goods_count: int = 1                     # 商品数量
 @export var goods_type: GoodsStat.GoodsType = GoodsStat.GoodsType.食品  # 商品类型筛选
+@export var goods_success_rate_percent: int = 100
 
 @export_category("遗物")
 @export var is_relics: QuestionOptionEnum = QuestionOptionEnum.否    # 遗物发放类型
 @export var relics: Array[RelicStat] = []           # 指定发放的遗物列表
 @export var relics_rarity: RelicStat.Rarity = RelicStat.Rarity.普通  # 遗物稀有度
 @export var relics_count: int = 1                   # 遗物数量
+@export var relic_success_rate_percent: int = 100
